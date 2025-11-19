@@ -9,11 +9,16 @@ from fastapi import status
 class TestRootEndpoint:
     """Tests for the root endpoint."""
     
-    def test_root_redirects_to_static_index(self, client):
-        """Test that root endpoint redirects to static index.html."""
-        response = client.get("/", follow_redirects=False)
-        assert response.status_code == status.HTTP_307_TEMPORARY_REDIRECT
-        assert response.headers["location"] == "/static/index.html"
+    def test_root_returns_api_status(self, client):
+        """Test that root endpoint returns API status message."""
+        response = client.get("/")
+        assert response.status_code == status.HTTP_200_OK
+        
+        result = response.json()
+        assert "message" in result
+        assert "status" in result
+        assert result["message"] == "Mergington High School Activities API"
+        assert result["status"] == "running"
 
 
 class TestActivitiesEndpoint:

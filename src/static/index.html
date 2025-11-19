@@ -5,48 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mergington High School Activities</title>
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      /* ...existing styles... */
-      .participants-section {
-        margin-top: 15px;
-        padding: 10px;
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        border-left: 3px solid #007bff;
-      }
-
-      .participants-title {
-        font-weight: bold;
-        color: #495057;
-        margin-bottom: 8px;
-        font-size: 0.9em;
-      }
-
-      .participants-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .participants-list li {
-        padding: 3px 0;
-        color: #6c757d;
-        font-size: 0.85em;
-      }
-
-      .participants-list li:before {
-        content: "• ";
-        color: #007bff;
-        font-weight: bold;
-        margin-right: 5px;
-      }
-
-      .no-participants {
-        color: #868e96;
-        font-style: italic;
-        font-size: 0.85em;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -93,35 +51,5 @@
     </footer>
 
     <script src="app.js"></script>
-    <script>
-      // ...existing code...
-      function createActivityCard(name, activity) {
-        const participantsList =
-          activity.participants && activity.participants.length > 0
-            ? activity.participants.map((email) => `<li>${email}</li>`).join("")
-            : '<div class="no-participants">No participants yet</div>';
-
-        return `
-            <div class="activity-card">
-                <h3>${name}</h3>
-                <p><strong>Description:</strong> ${activity.description}</p>
-                <p><strong>Schedule:</strong> ${activity.schedule}</p>
-                <p><strong>Max Participants:</strong> ${activity.max_participants}</p>
-                <div class="participants-section">
-                    <div class="participants-title">Current Participants (${
-                      activity.participants ? activity.participants.length : 0
-                    }):</div>
-                    ${
-                      activity.participants && activity.participants.length > 0
-                        ? `<ul class="participants-list">${participantsList}</ul>`
-                        : '<div class="no-participants">No participants yet</div>'
-                    }
-                </div>
-                <button onclick="signUp('${name}')">Sign Up</button>
-            </div>
-        `;
-      }
-      // ...existing code...
-    </script>
   </body>
 </html>

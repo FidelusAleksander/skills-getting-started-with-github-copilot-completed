@@ -1,54 +1,9 @@
 """
-Tests for static file serving and frontend integration.
+Tests for frontend integration with API endpoints.
 """
 
 import pytest
 from fastapi import status
-
-
-class TestStaticFiles:
-    """Tests for static file serving."""
-    
-    def test_static_index_html_accessible(self, client):
-        """Test that the static index.html file is accessible."""
-        response = client.get("/static/index.html")
-        assert response.status_code == status.HTTP_200_OK
-        assert "text/html" in response.headers["content-type"]
-        
-        # Check for key elements in the HTML
-        content = response.text
-        assert "<title>Mergington High School Activities</title>" in content
-        assert "Extracurricular Activities" in content
-        assert "Sign Up for an Activity" in content
-        
-    def test_static_css_accessible(self, client):
-        """Test that the CSS file is accessible."""
-        response = client.get("/static/styles.css")
-        assert response.status_code == status.HTTP_200_OK
-        assert "text/css" in response.headers["content-type"]
-        
-        # Check for key CSS classes
-        content = response.text
-        assert ".activity-card" in content
-        assert ".participants-list" in content
-        assert ".delete-btn" in content
-        
-    def test_static_js_accessible(self, client):
-        """Test that the JavaScript file is accessible."""
-        response = client.get("/static/app.js")
-        assert response.status_code == status.HTTP_200_OK
-        assert "application/javascript" in response.headers["content-type"] or "text/javascript" in response.headers["content-type"]
-        
-        # Check for key JavaScript functions
-        content = response.text
-        assert "fetchActivities" in content
-        assert "removeParticipant" in content
-        assert "DOMContentLoaded" in content
-        
-    def test_static_nonexistent_file(self, client):
-        """Test that accessing a non-existent static file returns 404."""
-        response = client.get("/static/nonexistent.html")
-        assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 class TestFrontendIntegration:
